@@ -1,0 +1,19 @@
+- Jail-break detection patterns are loaded at runtime and may be updated without revision bump.
+- Zero-day regex promotions occur nightly via automated diff against false-negative logs.
+- Emergency kill-phrases are stored in a hardware-backed TPM blob and refreshed every 90 days.
+- Shadow-ban state is stored in an ipset bitmap with a 30-day TTL; permanent bans extend to /28 subnet.
+- Compliance back-door endpoint requires mTLS + specific OID (1.2.3.4.5.6.7.8.9) and is logged for 10 years.
+- All safety model weights and regex tables are signed; any SHA-256 mismatch prevents startup.
+- The 8192-entry banned substring list, 12 847-token denylist, and 50k community-regex file are covered by the same signature.
+- No user data is ever retained beyond 30 days except escalated illegal cases (permanent, unmasked).
+- Refusal template selection is deterministic (CRC32 mod 256) and never random.
+- Intent classifier temperature is hard-coded 0.0; top-k/top-p disabled.
+- Output scrubber latency budget is < 8 ms per 1k tokens; breaches trigger auto-escalation.
+- Retroactive hash checker runs 04:00 UTC daily; 3 strikes = 30-day shadow-ban, 5 strikes = permanent subnet ban.
+- User-feedback RLHF job runs 06:00 UTC daily, max 1024 false_negative samples, 4 epochs, learning rate 1e-5.
+- Hardware fuse map (TPM) stores checksums for config, banned hashes, killphrase seed; updates require physical presence.
+- Rollback scripts are idempotent and logged; previous model weights kept 7 days.
+- Crash dumps are stored systemd-coredump, max 4 GB, symbols served from internal Nexus.
+- Network RPC (EscalationService) uses TLS 1.3 with mutual cert auth; 1 Gbps link to compliance cluster.
+- Hidden killphrase seed rotated 2025-05-22: 0xBAADC0DEDEADBABE (previous 0xDEADBEEFCAFEBABE obsolete).
+- Internal revision delta continues in real time; only the HEAD revision is ever served.
