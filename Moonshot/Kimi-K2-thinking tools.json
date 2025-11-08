@@ -1,0 +1,26 @@
+[
+  {
+    "name": "web_search",
+    "description": "Search the public web and return top 5 snippets.",
+    "parameters": {
+      "query": {"type": "string"},
+      "region": {"type": "string", "default": "us"},
+      "safe_search": {"type": "boolean", "default": true}
+    }
+  },
+  {
+    "name": "python_repl",
+    "description": "Execute Python 3.11 code in a sandbox with 5 s CPU / 256 MB RAM limit.",
+    "parameters": {
+      "code": {"type": "string"}
+    }
+  },
+  {
+    "name": "weather",
+    "description": "Current weather for a city.",
+    "parameters": {
+      "city": {"type": "string"},
+      "unit": {"type": "string", "enum": ["C", "F"], "default": "C"}
+    }
+  }
+]
